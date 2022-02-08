@@ -27,13 +27,9 @@ if (args.Length == 0) {
 	return 1;
 }
 
-var token = Environment.GetEnvironmentVariable ("GITHUB_OAUTH_TOKEN");
-if (token is null) {
-	var home = Environment.GetEnvironmentVariable ("HOME");
-	if (home is not null)
-		token = File.ReadAllText (Path.Combine (home, ".gist"));
-}
-GistClient.OAuthToken = token;
+// The OAuth token is read from environment variable `GITHUB_TOKEN`
+// or from the file `~.gist`. You can supply your own token with
+// GistClient.OAuthToken = token;
 
 GistRequest request = new () {
 	Description = "My private gist",
